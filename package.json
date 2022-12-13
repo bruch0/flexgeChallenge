@@ -1,0 +1,76 @@
+{
+  "name": "hubback",
+  "version": "0.0.1",
+  "exports": "./index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "NODE_ENV=dev npx nodemon --watch",
+    "lint": "npx eslint \"src/**/**.ts\" --max-warnings=0",
+    "test:watch": "NODE_ENV=test npx jest -i --watch",
+    "test:coverage": "NODE_ENV=test npx jest -i --coverage",
+    "test:workflow": "NODE_ENV=test npx jest --coverage"
+  },
+  "engines": {
+    "node": ">=18.9.1"
+  },
+  "author": "bruch0",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.5.9",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "faker": "^5.5.3",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.8.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/faker": "^5.5.9",
+    "@types/jest": "^29.2.2",
+    "@types/node": "^18.11.9",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "babel-jest": "^29.3.1",
+    "dotenv-cli": "^6.0.0",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^2.7.1",
+    "supertest": "^6.3.1",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.8.4"
+  },
+  "ntl": {
+    "runner": "npm"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/server.ts",
+    "ext": "ts, js"
+  }
+}
