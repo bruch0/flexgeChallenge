@@ -4,7 +4,8 @@
   "exports": "./index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "NODE_ENV=dev npx nodemon --watch",
+    "dev:local": "NODE_ENV=dev npx nodemon --watch",
+    "dev:docker": "docker-compose up",
     "lint": "npx eslint \"src/**/**.ts\" --max-warnings=0",
     "test:watch": "NODE_ENV=test npx jest -i --watch",
     "test:coverage": "NODE_ENV=test npx jest -i --coverage",

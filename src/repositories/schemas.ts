@@ -101,5 +101,7 @@ const companySchema = new mongoose.Schema({
 });
 
 const Company = mongoose.model('Company', companySchema);
+const Contracts = mongoose.model('Contracts', contractSchema);
+const Products = mongoose.model('Products', productSchema);
 
-export { Company };
+export { Company, Contracts, Products };
