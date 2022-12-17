@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "faker": "^5.5.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.8.0"
   },
@@ -46,7 +47,6 @@
     "eslint-plugin-n": "^15.5.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
-    "faker": "^5.5.3",
     "prettier": "^2.7.1",
     "supertest": "^6.3.1",
     "ts-jest": "^29.0.3",
