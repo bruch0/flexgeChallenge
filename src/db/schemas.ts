@@ -100,8 +100,8 @@ const companySchema = new mongoose.Schema({
   contracts: [contractSchema],
 });
 
-const Company = mongoose.model('Company', companySchema);
+const Companies = mongoose.model('Company', companySchema);
 const Contracts = mongoose.model('Contracts', contractSchema);
 const Products = mongoose.model('Products', productSchema);
 
-export { Company, Contracts, Products };
+export { Companies, Contracts, Products };
