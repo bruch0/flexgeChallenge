@@ -4,8 +4,8 @@ import * as contractService from '@services/contracts';
 
 const getAllContracts = async (_: Request, response: Response, next: NextFunction): Promise<any> => {
   try {
-    await contractService.getAllContracts();
-    return response.status(200).send({ message: 'Ok' });
+    const contracts = await contractService.getAllContracts();
+    return response.status(200).send(contracts);
   } catch (error) {
     next(error);
   }

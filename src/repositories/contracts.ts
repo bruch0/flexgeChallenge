@@ -1,9 +1,9 @@
-import { Contracts } from './schemas';
+import { Companies } from '../db/schemas';
 
 const getAllContracts = async (): Promise<any> => {
-  const contracts = await Contracts.find();
+  const companies = await Companies.find();
 
-  return contracts;
+  return companies;
 };
 
 export { getAllContracts };
