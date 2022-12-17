@@ -1,9 +1,12 @@
 import './setup';
 import app from './app';
-import { connectDatabase } from 'db/index';
+import { connectDatabase, initializeDatabaseContracts } from 'db/index';
 
 connectDatabase()
-  .then(() => app.listen(process.env.PORT))
+  .then(async () => {
+    await initializeDatabaseContracts();
+    app.listen(process.env.PORT);
+  })
   .catch((error) => console.log(error));
 
 console.log('app is listening on', process.env.PORT);
