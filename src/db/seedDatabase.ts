@@ -1,6 +1,6 @@
 import faker from 'faker';
 
-import { Companies } from './schemas';
+import { Contract, Product } from './schemas';
 
 interface ProductInterface {
   name: string;
@@ -11,26 +11,7 @@ interface ProductInterface {
   termBegin: Date;
 }
 
-interface CompanyInterface {
-  country: string;
-  state: string;
-  city: string;
-  documentId: string;
-  socialReason: string;
-  address: string;
-  district: string;
-  number: number;
-  zipcode: string;
-  email: string;
-  phone: string;
-  startDate: Date;
-  endDate: Date;
-  dueDay: Date;
-  contractUrl: string;
-  products: ProductInterface[];
-}
-
-const getRandomProduct = (): ProductInterface => {
+const getRandomProduct = async (): Promise<ProductInterface> => {
   const randomNumber = Math.ceil(Math.random() * 20);
 
   const products = [
@@ -204,7 +185,10 @@ const getRandomProduct = (): ProductInterface => {
     },
   ];
 
-  return products[randomNumber];
+  const product = new Product(products[randomNumber]);
+  await product.save();
+
+  return product;
 };
 
 const generageTaxId = (): string => {
@@ -247,8 +231,8 @@ const generageTaxId = (): string => {
   return generateFakeTaxId();
 };
 
-const getRandomContract = (): CompanyInterface => {
-  const contract = {
+const generateRandomContract = async (companyNumber: number): Promise<void> => {
+  const contract = new Contract({
     country: faker.address.country(),
     state: faker.address.state(),
     city: faker.address.city(),
@@ -264,61 +248,16 @@ const getRandomContract = (): CompanyInterface => {
     endDate: new Date('2024-01-01'),
     dueDay: new Date('2024-01-01'),
     contractUrl: 'randomUrl',
-    products: [getRandomProduct(), getRandomProduct()],
-  };
-
-  return contract;
+    companyName: `Empresa ${companyNumber}`,
+    products: [await getRandomProduct(), await getRandomProduct()],
+  });
+  await contract.save();
 };
 
 export const seedDabatase = async (): Promise<void> => {
-  await Companies.insertMany([
-    {
-      name: 'Empresa 1',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 2',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 3',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 4',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 5',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 6',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 7',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 8',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 9',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 10',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 11',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-    {
-      name: 'Empresa 12',
-      contracts: [getRandomContract(), getRandomContract(), getRandomContract()],
-    },
-  ]);
+  for (let index = 1; index <= 25; index++) {
+    await generateRandomContract(index);
+  }
+
+  console.log('Seed complete!');
 };
