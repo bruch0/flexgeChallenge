@@ -14,4 +14,13 @@ const getAllContracts = async (request: Request, response: Response, next: NextF
   }
 };
 
-export { getAllContracts };
+const createContract = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
+  try {
+    await contractService.createContract(request.body);
+    return response.status(200).send({ message: 'Created' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { getAllContracts, createContract };
