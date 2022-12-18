@@ -1,9 +1,17 @@
-import { Companies } from '../db/schemas';
+import { Contract } from '@db/schemas';
 
-const getAllContracts = async (): Promise<any> => {
-  const companies = await Companies.find();
+import { Contracts } from '@interfaces/index';
 
-  return companies;
+interface ReturnType {
+  contracts: Contracts[];
+  count: number;
+}
+
+const getAllContracts = async (skip: number): Promise<ReturnType> => {
+  const contracts = await Contract.find().limit(10).skip(skip);
+  const count = await Contract.find().count();
+
+  return { contracts, count };
 };
 
 export { getAllContracts };
