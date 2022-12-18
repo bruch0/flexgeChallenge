@@ -1,4 +1,7 @@
+import * as contractSchema from '@services/schemas/contracts';
 import * as contractRepository from '@repositories/contracts';
+
+import Error from '@errors/genericError';
 
 import { Contracts } from '@interfaces/index';
 
@@ -13,4 +16,69 @@ const getAllContracts = async (skip: string): Promise<ReturnType> => {
   return { contracts, count };
 };
 
-export { getAllContracts };
+const createContract = async ({
+  country,
+  state,
+  city,
+  documentId,
+  socialReason,
+  address,
+  district,
+  number,
+  zipcode,
+  email,
+  phone,
+  startDate,
+  endDate,
+  dueDay,
+  contractUrl,
+  companyName,
+  products,
+}: Contracts): Promise<void> => {
+  const validation = contractSchema.createContract.validate({
+    country,
+    state,
+    city,
+    documentId,
+    socialReason,
+    address,
+    district,
+    number,
+    zipcode,
+    email,
+    phone,
+    startDate,
+    endDate,
+    dueDay,
+    contractUrl,
+    companyName,
+    products,
+  });
+
+  if (validation.error != null) {
+    const errorMessage = validation.error.details[0].message;
+    throw new Error('bodyValidation', errorMessage, 400);
+  }
+
+  await contractRepository.createContract({
+    country,
+    state,
+    city,
+    documentId,
+    socialReason,
+    address,
+    district,
+    number,
+    zipcode,
+    email,
+    phone,
+    startDate,
+    endDate,
+    dueDay,
+    contractUrl,
+    companyName,
+    products,
+  });
+};
+
+export { getAllContracts, createContract };
