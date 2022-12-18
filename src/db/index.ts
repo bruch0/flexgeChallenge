@@ -5,7 +5,7 @@ import { seedDabatase } from './seedDatabase';
 
 export const connectDatabase = async (): Promise<void> => {
   mongoose
-    .connect('mongodb://db:27017/flexge')
+    .connect('mongodb://db:27017/flexge_global')
     .then(() => {
       console.log('MongoDB Conectado');
     })

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   server:
-    container_name: NODEJS_SERVER_MEDIUM
+    container_name: flexge_back
     build: '.'
     volumes:
       - ./:/node-app
@@ -22,7 +22,7 @@ services:
     privileged: true
     environment:
       - RELOAD_DELAY=1.5
-      - RELOAD_CONTAINER=<NODEJS_SERVER_MEDIUM>
+      - RELOAD_CONTAINER=<flexge_back>
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - ./:/node-app
@@ -30,7 +30,7 @@ services:
 
   db:
     image: 'mongo'
-    container_name: MONGODB_MEDIUM
+    container_name: flexge_mongo
     ports:
       - '27017:27017'
     volumes:
