@@ -7,7 +7,7 @@ export interface ProductInterface {
   termBegin: Date;
 }
 export interface Contracts {
-  country: String;
+  country: string;
   state: string;
   city: string;
   documentId: string;
