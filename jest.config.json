@@ -12,7 +12,9 @@
     "@repositories/(.*)": "<rootDir>/src/repositories/$1",
     "@routers/(.*)": "<rootDir>/src/routers/$1",
     "@middlewares/(.*)": "<rootDir>/src/middlewares/$1",
-    "@errors/(.*)": "<rootDir>/src/errors/$1"
+    "@errors/(.*)": "<rootDir>/src/errors/$1",
+    "@db/(.*)": "<rootDir>/src/db/$1",
+    "@interfaces/(.*)": "<rootDir>/src/interfaces/$1"
   },
   "modulePathIgnorePatterns": ["dist, controllers"]
 }

@@ -9,7 +9,9 @@
       "@repositories/*": ["repositories/*"],
       "@routers/*": ["routers/*"],
       "@middlewares/*": ["middlewares/*"],
-      "@errors/*": ["errors/*"]
+      "@errors/*": ["errors/*"],
+      "@db/*": ["db/*"],
+      "@interfaces/*": ["interfaces/*"]
     },
     "target": "ES6",
     "module": "Node16",
