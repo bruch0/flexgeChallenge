@@ -1,6 +1,35 @@
-import mongoose from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 
-const productSchema = new mongoose.Schema({
+interface Products {
+  name: string;
+  amount: number;
+  unitPrice: number;
+  installments: number;
+  paidInstallments: number;
+  termBegin: Date;
+}
+
+interface Contracts {
+  country: string;
+  state: string;
+  city: string;
+  documentId: string;
+  socialReason: string;
+  address: string;
+  district: string;
+  number: number;
+  zipcode: string;
+  email: string;
+  phone: string;
+  startDate: Date;
+  endDate: Date;
+  dueDay: Date;
+  contractUrl: string;
+  companyName: string;
+  products: [Products];
+}
+
+const productSchema = new Schema<Products>({
   name: {
     type: String,
     required: true,
@@ -27,7 +56,7 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-const contractSchema = new mongoose.Schema({
+const contractSchema = new Schema<Contracts>({
   country: {
     type: String,
     required: true,
@@ -88,20 +117,14 @@ const contractSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  companyName: {
+    type: String,
+    required: true,
+  },
   products: [productSchema],
 });
 
-const companySchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  contracts: [contractSchema],
-});
+const Contract: Model<Contracts> = mongoose.model('Contracts', contractSchema);
+const Product: Model<Products> = mongoose.model('Products', productSchema);
 
-const Companies = mongoose.model('Company', companySchema);
-const Contracts = mongoose.model('Contracts', contractSchema);
-const Products = mongoose.model('Products', productSchema);
-
-export { Companies, Contracts, Products };
+export { Contract, Product };
