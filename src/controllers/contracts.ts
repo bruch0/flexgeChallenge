@@ -2,10 +2,13 @@ import { Request, Response, NextFunction } from 'express';
 
 import * as contractService from '@services/contracts';
 
-const getAllContracts = async (_: Request, response: Response, next: NextFunction): Promise<any> => {
+const getAllContracts = async (request: Request, response: Response, next: NextFunction): Promise<any> => {
   try {
-    const contracts = await contractService.getAllContracts();
-    return response.status(200).send(contracts);
+    const { skip } = request.query;
+    if (typeof skip !== 'string') return response.status(403).send({ message: 'Invalid skip' });
+
+    const data = await contractService.getAllContracts(skip);
+    return response.status(200).send(data);
   } catch (error) {
     next(error);
   }
