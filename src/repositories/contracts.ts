@@ -14,4 +14,10 @@ const getAllContracts = async (skip: number): Promise<ReturnType> => {
   return { contracts, count };
 };
 
-export { getAllContracts };
+const createContract = async (body: Contracts): Promise<void> => {
+  const newContract = new Contract(body);
+
+  await newContract.save();
+};
+
+export { getAllContracts, createContract };
