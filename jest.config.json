@@ -16,5 +16,5 @@
     "@db/(.*)": "<rootDir>/src/db/$1",
     "@interfaces/(.*)": "<rootDir>/src/interfaces/$1"
   },
-  "modulePathIgnorePatterns": ["dist, controllers"]
+  "modulePathIgnorePatterns": ["dist", "controllers", "db"]
 }

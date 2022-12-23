@@ -23,6 +23,6 @@
     "noImplicitAny": true
   },
   "ts-node": { "files": true },
-  "include": ["src", "tests/**/*", "global.d.ts"],
+  "include": ["src/**/*", "tests/**/*", "global.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
