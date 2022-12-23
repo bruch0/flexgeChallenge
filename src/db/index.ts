@@ -5,7 +5,11 @@ import { seedDabatase } from './seedDatabase';
 
 export const connectDatabase = async (): Promise<void> => {
   mongoose
-    .connect('mongodb://db:27017/db_flexge')
+    .connect(
+      `mongodb://${
+        process.env.NODE_ENV === 'local' || process.env.NODE_ENV === 'test' ? '127.0.0.1' : 'db'
+      }:27017/db_flexge`
+    )
     .then(() => {
       console.log('MongoDB Conectado');
     })
@@ -15,6 +19,10 @@ export const connectDatabase = async (): Promise<void> => {
 };
 
 mongoose.set('strictQuery', true);
+
+export const disconnectDatabase = async (): Promise<void> => {
+  await mongoose.connection.close();
+};
 
 export const initializeDatabaseContracts = async (): Promise<void> => {
   const contracts = await Contract.find();
